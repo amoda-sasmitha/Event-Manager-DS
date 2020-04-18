@@ -1,5 +1,5 @@
-<div class="card shadow border-0 rounded" >
-    <div class="card-header border-0 m-0 py-2 header-x bg-dark-shade"  > 
+<div class="card shadow border-0 rounded " >
+    <div class="card-header border-0 m-0 py-2 header-x bg-dark-shadet"  > 
         <h6 class=" text-dark font-weight-bold m-0">
             Event Calendar
         </h6>
@@ -25,14 +25,15 @@
 
     <ol class="days list-unstyled">
       <li *ngFor="let date of dates" >
-        <div class="date p-1 " 
-          [ngClass]="{ normal : date.count == 0 , task : date.count != 0 , today : date.date.getTime() === currentDate.getTime() }">
-            <span class="font-weight-bold {{date.date.getMonth() === currentMonth ? 'daytext' : 'text-dark2' }} p-1 ">
+        <div class="date p-1 " (click)="changeDate(date.date)"
+          [ngClass]="{ normal : date.count == 0 , task : date.count != 0 , today : date.date.getTime() === currentDate.getTime() ,
+            itemHide : date.date.getMonth() !== currentMonth }">
+            <span class="font-weight-bold {{date.date.getMonth() === currentMonth ? 'daytext' : 'text-white' }} p-1 ">
                 {{date.date | date: 'dd'}}
             </span><br>
             <span *ngIf="date.count != 0"
              class="font-weight-bold text-white badge taskText p-2 mx-1 mt-1">
-             {{("0" + date.count ).slice(-2)}} <label class="p-0 m-0 d-none d-md-inline-block">Events</label></span>
+             {{("0" + date.count ).slice(-2)}} <label class="p-0 m-0 d-none d-lg-inline-block">Events</label></span>
         </div>
       </li>
     </ol>

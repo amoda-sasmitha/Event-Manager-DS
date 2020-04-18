@@ -1,17 +1,29 @@
-<nav class="navbar navbar-dark bg-dark">
+<!-- <nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">
     <h5 class="my-0">Event Manager</h5>
   </a>
-</nav>
+</nav> -->
 <div class="wrapper" >
-<div class="container mt-3 ">
+<div class="container mt-3 mb-5">
   <div class="row">
     <div class="col-md-8 pr-md-1 col-sm-12" >
-      <calendar [event-counts]="this.CountEventsByDates(events)"></calendar>
+      <calendar 
+         (change)="OnCalendarDateClicked($event)"
+        [event-counts]="this.CountEventsByDates(events)"></calendar>
+      <events 
+        [events]="this.FilterEventsByDate()" 
+        [currentDate]="currentDate"
+        (addEvent)="OnClickAddEvent()">
+      </events>
     </div>
     <div class="col-md-4 col-sm-12" >
+      <event-modal
+      (dismiss)="DismissEventModal()"
+      [show]="show_event_modal"
+      ></event-modal>
       <upcoming-events [events]="events"></upcoming-events>
     </div>
+   
   </div>
 </div>
 </div>

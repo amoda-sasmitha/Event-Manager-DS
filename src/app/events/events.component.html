@@ -1,0 +1,35 @@
+<div class="card shadow border-0 rounded mt-3" >
+    <div class="card-header border-0 m-0 p-2 header-x bg-dark-shadet"  > 
+        <div class="d-flex" >
+            <h6 class=" text-dark font-weight-bold m-0">
+                Events <span class="badge badge-light text-muted px-2 pt-1  mx-1" >
+                    On {{ currentDate | date : 'dd MMMM yyyy '  }}</span>
+            </h6>
+             <span (click)="onClickAddEvent()"
+              class="curser badge badge-dark text-light  px-2 ml-auto mr-1" >Add Event</span>
+        </div>
+    </div>
+    <div class="px-2 py-2 m-0 border-bottom " *ngFor="let event of events">
+        <h6 class="text-dark py-1 px-1 m-0 small font-weight-bold">{{event.title}}</h6>
+        <p class="paragraph px-1 mb-1">
+            {{event.description}}
+        </p>
+        <span class=" badge badge-light text-secondary py-1 mx-1 rounded-0">
+            {{event.start_time.substr(0,5)}} - {{event.end_time.substr(0,5)}}
+        </span>
+    </div>
+
+    <div class="px-2 py-3 m-0 border-bottom " *ngIf="events.length == 0 ">
+        <h6 class="text-dark py-1 px-1 m-0 small font-weight-bold">Sorry,</h6>
+        <p class="paragraph px-1 mb-1">
+            No Events currently avaiable for this Day.You can add new events.
+        </p>
+                <span (click)="onClickAddEvent()" class="curser badge badge-success  py-1 mx-1 ">
+                    Add New Event
+                 </span>
+        
+    </div>
+
+
+   
+</div>

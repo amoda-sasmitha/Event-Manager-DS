@@ -48,7 +48,7 @@ Calendar Styling */
 
 .calendar .days li .date {
   margin: 0.15rem 0.15rem;
-  min-height: 5rem;
+  min-height: 4.2rem;
   border-radius: 5px;
 }
 
@@ -58,6 +58,7 @@ Calendar Styling */
 
 .normal{
   background-color: #f5f5f5;
+  cursor: pointer;
 }
 
 .normal:hover{
@@ -66,6 +67,7 @@ Calendar Styling */
 
 .task{
   background-color: #c8f2d2;
+  cursor: pointer;
 }
 
 .taskText{
@@ -78,7 +80,19 @@ Calendar Styling */
 
 .today{
   background-color: #c4e1ff !important;
+  cursor: pointer;
 
+}
+
+.itemHide {
+  background-color: #FFFFFF !important;
+  color: #FFFFFF !important;
+  cursor: unset !important;
+}
+
+.itemHide:hover{
+  background-color: #FFFFFF !important;
+  color: #FFFFFF !important;
 }
 
 .today:hover{

@@ -1,5 +1,6 @@
-import { Component, OnInit , Input } from '@angular/core';
+import { Component, OnInit , Input , Output , EventEmitter } from '@angular/core';
 import { DatePipe } from '@angular/common';
+
 
 @Component({
   selector: 'calendar',
@@ -13,7 +14,9 @@ export class CalendarComponent implements OnInit {
   currentMonth
   currentYear
   currentDate
+
   @Input('event-counts') public event_counts;
+  @Output() change = new EventEmitter();
 
   constructor(private datePipe :DatePipe ) {
        this.currentDate = new Date();
@@ -25,9 +28,11 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit(): void {
     this.showCalander(this.currentYear  , this.currentMonth );
-
-   
     console.log(this.dates);
+  }
+
+  changeDate(item){
+    this.change.emit(item);
   }
 
   getSunday(d) {
