@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+.bg-dark-shade{
+    background-color:  #57616b2d !important;
+}
+
+.header-x {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.paragraph {
+    color: var(--secondary);
+    font-size: smaller;
+}

@@ -1,0 +1,17 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand" href="#">
+    <h5 class="my-0">Event Manager</h5>
+  </a>
+</nav>
+<div class="wrapper" >
+<div class="container mt-3 ">
+  <div class="row">
+    <div class="col-md-8 pr-md-1 col-sm-12" >
+      <calendar [event-counts]="this.CountEventsByDates(events)"></calendar>
+    </div>
+    <div class="col-md-4 col-sm-12" >
+      <upcoming-events [events]="events"></upcoming-events>
+    </div>
+  </div>
+</div>
+</div>
