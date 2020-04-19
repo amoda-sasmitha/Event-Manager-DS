@@ -1,4 +1,4 @@
-import { Component, OnInit , Input , Output , EventEmitter} from '@angular/core';
+import { Component, OnInit , Input , Output , EventEmitter , SimpleChanges} from '@angular/core';
 import { DatePipe } from '@angular/common';
 @Component({
   selector: 'events',
@@ -20,5 +20,13 @@ export class EventsComponent implements OnInit {
   onClickAddEvent(){
     this.addEvent.emit();
   }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ('events' in changes) {
+      if (changes.events.currentValue) {
+        this.events = changes.events.currentValue;
+      }
+    }
+    }
 
 }

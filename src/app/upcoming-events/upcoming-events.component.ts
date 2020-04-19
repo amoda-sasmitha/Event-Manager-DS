@@ -1,4 +1,4 @@
-import { Component, OnInit ,Input } from '@angular/core';
+import { Component, OnInit ,Input , SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'upcoming-events',
@@ -11,6 +11,15 @@ export class UpcomingEventsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    this.upcoming_events = this.upcoming_events.slice(0,5)
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+  if ('upcoming_events' in changes) {
+    if (changes.upcoming_events.currentValue) {
+      this.upcoming_events = changes.upcoming_events.currentValue.slice(0,5);
+    }
+  }
   }
 
 }

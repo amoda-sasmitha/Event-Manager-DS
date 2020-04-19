@@ -18,8 +18,10 @@
     </div>
     <div class="col-md-4 col-sm-12" >
       <event-modal
-      (dismiss)="DismissEventModal()"
       [show]="show_event_modal"
+      (dismiss)="DismissEventModal()"
+      [currentDate]="currentDate"
+      (addEvent)="AddNewEvent($event)">
       ></event-modal>
       <upcoming-events [events]="events"></upcoming-events>
     </div>

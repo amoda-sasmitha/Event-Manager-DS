@@ -1,4 +1,4 @@
-import { Component, OnInit , Input , Output , EventEmitter } from '@angular/core';
+import { Component, OnInit , Input , Output , EventEmitter , SimpleChanges } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
 
@@ -29,6 +29,15 @@ export class CalendarComponent implements OnInit {
   ngOnInit(): void {
     this.showCalander(this.currentYear  , this.currentMonth );
     console.log(this.dates);
+  }
+  
+  ngOnChanges(changes: SimpleChanges) {
+  if ('event_counts' in changes) { 
+    if (changes.event_counts.currentValue) {
+      this.event_counts = changes.event_counts.currentValue;
+     this.showCalander(this.currentYear  , this.currentMonth );
+    }
+  }
   }
 
   changeDate(item){

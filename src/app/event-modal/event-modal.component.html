@@ -1,24 +1,43 @@
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <h6 class="modal-title" id="modal-basic-title">Add New Event</h6>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(0)">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="dateOfBirth">Date of birth</label>
-          <div class="input-group">
-            <input id="dateOfBirth" class="form-control" placeholder="yyyy-mm-dd" name="dp" ngbDatepicker #dp="ngbDatepicker">
-            <div class="input-group-append">
-              <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
-            </div>
+        <div class="row">
+           <div class="pb-3 col-sm-6 col-12">
+              <h6 class=" text-dark" >Event Date</h6>
+                <input type="text"  readonly [value]="currentDate | date: 'longDate'" class="form-control"  />
+               
+         </div>  
+          <div class="pb-3 col-sm-6 col-12">
+            <h6 class=" text-dark" >Event Title</h6>
+            <input type="text"  [(ngModel)]="title"  class="form-control" placeholder="Enter Your Title" />
+              <span class="small text-danger font-weight-bold">{{errors.title}}</span>
           </div>
+          <div class="pb-3 col-sm-6 col-12">
+            <h6 class=" text-dark" >Event Description</h6>
+            <textarea type="text" rows="5" [(ngModel)]="description"  class="form-control" 
+            placeholder="Enter Your Description" ></textarea>
+              <span class="small text-danger font-weight-bold">{{errors.description}}</span>
+          </div>
+          <div class="pb-3 col-sm-3 col-6">
+            <h6 class=" text-dark" >Start Time</h6>
+            <ngb-timepicker [(ngModel)]="starttime"></ngb-timepicker>
+            <span class="small text-danger font-weight-bold">{{errors.time}}</span>
+          </div>
+          <div class="pb-3 col-sm-3 col-6">
+            <h6 class=" text-dark" >End Time</h6>
+            <ngb-timepicker [(ngModel)]="endtime"></ngb-timepicker>
+         </div>
+
+          
         </div>
-      </form>
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close(1)">Save</button>
+    <div class="modal-footer border-0">
+      <button type="button" class="btn  btn-success" (click)="validate()">Save</button>
     </div>
   </ng-template>
+

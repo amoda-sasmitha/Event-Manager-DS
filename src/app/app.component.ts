@@ -8,41 +8,47 @@ import { Component ,  OnInit} from '@angular/core';
 export class AppComponent {
    public events = [
     {
-      date :  new Date('2020-04-19 00:00:00') ,
+      id : 1001,
+      date :  new Date('2020-04-25 00:00:00') ,
       title : "Angular Assignment",
       description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fermentum augue ut lorem suscipit luctus.",
-      start_time : "10:30:00",
-      end_time : "12:00:00",
+      start_time : new Date('2020-04-25 12:00:00'),
+      end_time : new Date('2020-04-25 13:50:00'),
     },
     {
-     date :  new Date('2020-04-12 00:00:00') ,
+     id : 1002,
+     date :  new Date('2020-04-30 00:00:00') ,
      title : "CV Upload to Courseweb",
      description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fermentum augue ut lorem suscipit luctus.",
-     start_time : "14:30:00",
-     end_time : "14:45:00",
+     start_time : new Date('2020-04-30 14:00:00'),
+     end_time : new Date('2020-04-30 14:40:00'),
    },
    {
+    id : 1003,
     date :  new Date('2020-04-22 00:00:00') ,
     title : "CV Upload to Courseweb",
     description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fermentum augue ut lorem suscipit luctus.",
-    start_time : "15:00:00",
-    end_time : "15:20:00",
+    start_time : new Date('2020-04-22 04:00:00'),
+    end_time : new Date('2020-04-22 05:00:00'),
   },
   {
+    id : 1004,
     date :  new Date('2020-04-22 00:00:00') ,
     title : "CV Upload to Courseweb",
     description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam fermentum augue ut lorem suscipit luctus.",
-    start_time : "15:30:00",
-    end_time : "15:40:00",
+    start_time : new Date('2020-04-22 13:00:00'),
+    end_time : new Date('2020-04-22 14:00:00'),
   },
   ];
-  public currentDate: Date;
+  public currentDate: Date = new Date();
   public show_event_modal : boolean = false;
+ 
+  constructor() { 
+    this.currentDate.setHours(0,0,0,0);
+  }
 
   ngOnInit(): void {
-    this.currentDate = new Date();
-    this.currentDate.setHours(0,0,0,0);
-
+    this.FilterandSortDateArray()
   }
 
   FilterEventsByDate(){
@@ -51,6 +57,7 @@ export class AppComponent {
 
   OnCalendarDateClicked(date:Date){
     this.currentDate = date;
+    this.FilterandSortDateArray()
   }
 
   OnClickAddEvent(){
@@ -59,6 +66,27 @@ export class AppComponent {
 
   DismissEventModal(){
     this.show_event_modal = false;
+  }
+
+  AddNewEvent(Event){
+    console.log(Event);
+    this.events.push(Event);
+    this.FilterandSortDateArray()
+  }
+
+  FilterandSortDateArray(){
+    let now = Date.now()
+    console.log( new Date().getTime() );
+
+    this.events = this.events.filter( item => {
+       return item.end_time.getTime() > now
+    })
+
+    this.events.sort(function(a,b){
+      return a.start_time.getTime() - b.start_time.getTime() ;
+    });
+
+    console.log(this.events);
   }
   
 
