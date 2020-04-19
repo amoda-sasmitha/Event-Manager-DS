@@ -5,7 +5,7 @@
                 Events <span class="badge badge-light text-muted px-2 pt-1  mx-1" >
                     On {{ currentDate | date : 'dd MMMM yyyy '  }}</span>
             </h6>
-             <span (click)="onClickAddEvent()"
+             <span (click)="onClickAddEvent()" *ngIf="currentDate.getTime() >= today.getTime()"
               class="curser badge badge-dark text-light  px-2 ml-auto mr-1" >Add Event</span>
         </div>
     </div>
@@ -14,12 +14,16 @@
         <p class="paragraph px-1 mb-1">
             {{event.description}}
         </p>
+        <div class="d-flex pb-2" >
         <span class=" badge badge-light text-secondary py-1 mx-1 rounded-0">
-            {{event.start_time}} - {{event.end_time}}
+            From  {{event.start_time | date : 'HH:mm'}} - {{event.end_time | date : 'HH:mm' }}
         </span>
+        <span class=" badge badge-info text-white py-1 mx-1 ml-auto curser" (click)="onClickUpdate(event)">Edit</span>
+        <span class=" badge badge-danger text-white py-1 mx-1 curser " (click)="onClickDelete(event)">Delete</span>
+        </div>
     </div>
 
-    <div class="px-2 py-3 m-0 border-bottom " *ngIf="events.length == 0 ">
+    <div class="px-2 py-3 m-0 border-bottom " *ngIf="events.length == 0 && currentDate.getTime() >= today.getTime()">
         <h6 class="text-dark py-1 px-1 m-0 small font-weight-bold">Sorry,</h6>
         <p class="paragraph px-1 mb-1">
             No Events currently avaiable for this Day.You can add new events.
@@ -30,6 +34,76 @@
         
     </div>
 
+    <div class="px-2 py-3 m-0 border-bottom " *ngIf="today.getTime() > currentDate.getTime() ">
+        <h6 class="text-dark py-1 px-1 m-0 small font-weight-bold">Sorry,</h6>
+        <p class="paragraph px-1 mb-1">
+            You cant add events to previous days.
+        </p>       
+    </div>
 
-   
 </div>
+<!-- Delete Modal -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h6 class="modal-title" id="modal-basic-title">Delete Event</h6>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(0)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <p><strong>Are you sure you want to delete this event?</strong></p>
+        <p>All information associated to event will be permanently deleted.
+        <span class="text-danger">This operation can not be undone.</span>
+        </p>
+      </div>
+    <div class="modal-footer border-0">
+      <button type="button" class="btn  btn-secondary" (click)="modal.dismiss(0)" >Cancel</button>
+      <button type="button" class="btn  btn-danger" (click)=" modal.close(1)">Delete</button>
+    </div>
+  </ng-template>
+
+  <!-- Update Modal -->
+  <ng-template #updatecontent let-modal>
+    <div class="modal-header">
+      <h6 class="modal-title" id="modal-basic-title">Upate Event</h6>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss(0)">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+           <div class="pb-3 col-sm-6 col-12">
+              <h6 class=" text-dark" >Event Date</h6>
+                <input type="text"  readonly  [value]="updateDate | date: 'longDate'" class="form-control"  />
+               
+         </div>  
+          <div class="pb-3 col-sm-6 col-12">
+            <h6 class=" text-dark" >Event Title</h6>
+            <input type="text" [(ngModel)]="title"   class="form-control" placeholder="Enter Your Title" />
+              <span class="small text-danger font-weight-bold">{{errors.title}}</span>
+          </div>
+          <div class="pb-3 col-sm-6 col-12">
+            <h6 class=" text-dark" >Event Description</h6>
+            <textarea type="text" rows="5"  class="form-control" [(ngModel)]="description"
+            placeholder="Enter Your Description" ></textarea>
+              <span class="small text-danger font-weight-bold">{{errors.description}}</span>
+          </div>
+          <div class="pb-3 col-sm-3 col-6">
+            <h6 class=" text-dark" >Start Time</h6>
+            <ngb-timepicker [(ngModel)]="start_time"></ngb-timepicker>
+            <span class="small text-danger font-weight-bold">{{errors.time}}</span>
+          </div>
+          <div class="pb-3 col-sm-3 col-6">
+            <h6 class=" text-dark" >End Time</h6>
+            <ngb-timepicker [(ngModel)]="end_time"></ngb-timepicker>
+         </div>
+
+          
+        </div>
+    </div>
+    <div class="modal-footer border-0">
+        <button type="button" class="btn  btn-success" (click)="validate()">Update</button>
+        <button type="button" class="btn  btn-secondary" (click)="modal.close(0)">Cancel</button>
+    </div>
+  </ng-template>
+

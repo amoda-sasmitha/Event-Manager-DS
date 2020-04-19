@@ -74,9 +74,20 @@ export class AppComponent {
     this.FilterandSortDateArray()
   }
 
+  DeleteEvent(Event){
+    this.events = this.events.filter( item => item.id !== Event.id );
+    this.FilterandSortDateArray();
+  }
+
+  UpdateEvent(event){
+    console.log("App" , event);
+    this.events = this.events.filter( item => item.id !== event.id );
+    this.events.push(event);
+    this.FilterandSortDateArray();
+  }
+
   FilterandSortDateArray(){
     let now = Date.now()
-    console.log( new Date().getTime() );
 
     this.events = this.events.filter( item => {
        return item.end_time.getTime() > now
@@ -87,6 +98,7 @@ export class AppComponent {
     });
 
     console.log(this.events);
+
   }
   
 

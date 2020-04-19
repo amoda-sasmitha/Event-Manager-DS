@@ -8,13 +8,6 @@ import { iif } from 'rxjs';
   styleUrls: ['./event-modal.component.css'],
 })
 export class EventModalComponent implements OnInit {
-
-  public title : string = "";
-  public description : string = "";
-  public starttime = {hour: 12, minute: 0};
-  public endtime = {hour: 12, minute: 0};
-
-  public errors = { title : "" , description : "" , time : "" }
  
   @Input() public show:boolean;
   @Input() public currentDate:Date;
@@ -22,10 +15,17 @@ export class EventModalComponent implements OnInit {
   @Output() public dismiss = new EventEmitter();
   @Output() addEvent = new EventEmitter();
 
+ 
+  public title : string = "";
+  public description : string = "";
+  public starttime = {hour: 12, minute: 0};
+  public endtime = {hour: 12, minute: 0};
+  public errors = { title : "" , description : "" , time : "" }
+
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    
+   
   }
 
   open(content) {

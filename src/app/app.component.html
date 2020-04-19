@@ -1,8 +1,8 @@
-<!-- <nav class="navbar navbar-dark bg-dark">
+<nav class="navbar navbar-dark bg-dark">
   <a class="navbar-brand" href="#">
     <h5 class="my-0">Event Manager</h5>
   </a>
-</nav> -->
+</nav>
 <div class="wrapper" >
 <div class="container mt-3 mb-5">
   <div class="row">
@@ -13,7 +13,10 @@
       <events 
         [events]="this.FilterEventsByDate()" 
         [currentDate]="currentDate"
-        (addEvent)="OnClickAddEvent()">
+        (addEvent)="OnClickAddEvent()"
+        (deleteEvent)="DeleteEvent($event)"
+        (updateEvent)="UpdateEvent($event)"
+        >
       </events>
     </div>
     <div class="col-md-4 col-sm-12" >

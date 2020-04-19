@@ -1,10 +1,10 @@
-<div class="card shadow border-0 rounded" >
+<div class="card shadow border-0 rounded" *ngIf="upcoming_events.length > 0">
     <div class="card-header border-0 m-0 p-2 header-x bg-dark-shadet"  > 
         <h6 class=" text-dark font-weight-bold m-0">
            <span class="bg-success rounded px-2 py-0 text-white small font-weight-bold">Next</span> Event 
         </h6>
     </div>
-    <div class="px-1 py-2 m-0 border-bottom " >
+    <div class="px-1 py-2 m-0 border-bottom " *ngIf="upcoming_events.length > 0" >
         <h6 class="text-dark py-1 px-1 m-0 small font-weight-bold">{{upcoming_events[0].title}}</h6>
         <p class="paragraph px-1 mb-1">
             {{upcoming_events[0].description}}
@@ -15,7 +15,7 @@
     </div>
    
 </div>
-<div class="card shadow border-0 rounded mt-3" >
+<div class="card shadow border-0 rounded mt-3 pb-2" *ngIf="upcoming_events.length >= 2 || upcoming_events.length == 0">
     <div class="card-header border-0 m-0 p-2 header-x bg-dark-shadet"  > 
         <h6 class=" text-dark font-weight-bold m-0">
             Upcoming Events 
@@ -29,6 +29,12 @@
         <span class=" badge badge-light text-secondary py-1 mx-1 rounded-0">
             {{event.date | date : 'longDate'}}  from  {{event.start_time | date : 'HH:mm'}} - {{event.end_time | date : 'HH:mm' }}
         </span>
+    </div>
+    <div class="px-1 py-2 m-0 border-bottom " *ngIf="upcoming_events.length == 0">
+        <h6 class="text-dark py-1 px-1 m-0 small font-weight-bold">Sorry</h6>
+        <p class="paragraph px-1 mb-1">
+            No Events currently avaiable
+        </p>
     </div>
    
 </div>
