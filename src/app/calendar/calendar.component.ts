@@ -1,6 +1,13 @@
+
 import { Component, OnInit , Input , Output , EventEmitter , SimpleChanges } from '@angular/core';
 import { DatePipe } from '@angular/common';
 
+/*
+* This is a simple calendar component made by myself
+* Can add event counts and display dates of them
+* Change months and navigate 
+* No thirdparty libraries used
+*/
 
 @Component({
   selector: 'calendar',
@@ -23,7 +30,6 @@ export class CalendarComponent implements OnInit {
        this.currentDate.setHours(0,0,0,0);
        this.currentYear = this.currentDate.getFullYear();
        this.currentMonth = this.currentDate.getMonth();
- 
    }
 
   ngOnInit(): void {
@@ -40,16 +46,19 @@ export class CalendarComponent implements OnInit {
   }
   }
 
+  //date change will notify
   changeDate(item){
     this.change.emit(item);
   }
 
+  //function to get sunday of a week
   getSunday(d) {
     var day = d.getDay(),
     diff = d.getDate() - day;
     return new Date(d.setDate(diff));
   }
 
+  //display calandar function
   showCalander(year , month ){
     let firstdate =  new Date( year ,month , 1);
     let lastdate =  new Date(year ,month + 1 , 0);
@@ -72,6 +81,7 @@ export class CalendarComponent implements OnInit {
 
   }
 
+//next month click function
 next() {
      this.currentYear = (this.currentMonth === 11) ? this.currentYear  + 1 : this.currentYear;
      console.log(this.currentYear);
@@ -79,6 +89,7 @@ next() {
     this.showCalander(this.currentYear ,this.currentMonth );
 }
 
+//previous month click function
 previous() {
   this.currentYear = (this.currentMonth === 0) ? this.currentYear - 1 : this.currentYear;
   console.log(this.currentYear);

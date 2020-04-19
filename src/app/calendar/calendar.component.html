@@ -12,7 +12,6 @@
         {{dates[dates.length - 1].date | date : 'MMM' }} {{currentYear}} </h2>
         <button class="btn my-auto btn-outline btn-outline-secondary btn-sm" (click)="next()"><b>Next</b></button>
     </div>
-    <!-- <p class="font-italic text-muted mb-5"></p> -->
     <ol class="day-names list-unstyled pt-2">
       <li class="font-weight-bold text-muted">Sun</li>
       <li class="font-weight-bold text-muted">Mon</li>
@@ -26,9 +25,9 @@
     <ol class="days list-unstyled">
       <li *ngFor="let date of dates" >
         <div class="date p-1 " (click)="changeDate(date.date)"
-          [ngClass]="{ normal : date.count == 0 , task : date.count != 0 , today : date.date.getTime() === currentDate.getTime() ,
-            itemHide : date.date.getMonth() !== currentMonth }">
-            <span class="font-weight-bold {{date.date.getMonth() === currentMonth ? 'daytext' : 'text-white' }} p-1 ">
+          [ngClass]="{ normal : date.count == 0 , task : date.count != 0 , today : date.date.getTime() === currentDate.getTime() 
+       }">
+            <span class="font-weight-bold {{date.date.getMonth() === currentMonth ? 'daytext' : 'text-dark2' }} p-1 ">
                 {{date.date | date: 'dd'}}
             </span><br>
             <span *ngIf="date.count != 0"

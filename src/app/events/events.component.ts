@@ -43,6 +43,7 @@ export class EventsComponent implements OnInit {
     this.addEvent.emit();
   }
 
+  //update changes 
   ngOnChanges(changes: SimpleChanges) {
     if ('events' in changes) {
       if (changes.events.currentValue) {
@@ -63,6 +64,7 @@ export class EventsComponent implements OnInit {
       });
     }
 
+  //Update modal will popup to update event data
     onClickUpdate(event){
  
       this.updateId = event.id;
@@ -82,6 +84,7 @@ export class EventsComponent implements OnInit {
      });
     }
 
+    //validate event update form
     validate(){
      
       let count:number = 0;

@@ -7,13 +7,16 @@ import { Component, OnInit ,Input , SimpleChanges } from '@angular/core';
 })
 export class UpcomingEventsComponent implements OnInit {
 
+  // Upcoming events as an input
   @Input('events') public upcoming_events;
   constructor() { }
 
+  //display only latest 5 events
   ngOnInit(): void {
     this.upcoming_events = this.upcoming_events.slice(0,5)
   }
 
+  //update upcoming events array when some change happen
   ngOnChanges(changes: SimpleChanges) {
   if ('upcoming_events' in changes) {
     if (changes.upcoming_events.currentValue) {

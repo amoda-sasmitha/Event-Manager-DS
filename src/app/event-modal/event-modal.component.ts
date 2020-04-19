@@ -15,7 +15,7 @@ export class EventModalComponent implements OnInit {
   @Output() public dismiss = new EventEmitter();
   @Output() addEvent = new EventEmitter();
 
- 
+ //add event form inputs
   public title : string = "";
   public description : string = "";
   public starttime = {hour: 12, minute: 0};
@@ -28,6 +28,7 @@ export class EventModalComponent implements OnInit {
    
   }
 
+  //open add event modal
   open(content) {
     this.modalService.open(content , { size: 'lg' }).result.then((result) => {
       this.dismiss.emit(); 
@@ -36,6 +37,7 @@ export class EventModalComponent implements OnInit {
     });
   }
 
+  //validate event add form
   validate(){
 
     let count:number = 0;
@@ -85,6 +87,7 @@ export class EventModalComponent implements OnInit {
 
   }
 
+  //update changes
   ngOnChanges(changes: SimpleChanges) {
     
     if ('show' in changes) {
